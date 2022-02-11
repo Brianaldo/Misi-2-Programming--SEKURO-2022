@@ -2,4 +2,4 @@ Tugas Sekuro
 ===================================
 
 
-![bukti run](.run.png)
+![bukti run](./run.png)

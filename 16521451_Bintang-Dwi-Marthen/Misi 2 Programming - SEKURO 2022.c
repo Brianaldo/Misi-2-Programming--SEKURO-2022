@@ -16,7 +16,7 @@ void pPlus(float *a, float b) {
 
 float fMin(float a, float b) {
     /* Function kurang */
-    /* Mengembalikan value a + b */
+    /* Mengembalikan value a - b */
     return (a-b);
 }
 

@@ -37,24 +37,31 @@ void pTimes(float *a, float b) {
     /* Procedure kali */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
-    *a /= b;
+    *a *= b;
 }
 
 float fDivide(float a, float b) {
     /* Function bagi */
     /* Mengembalikan value a / b */
+    return(a/b);
 }
 
 void pDivide(float *a, float b) {
     /* Procedure bagi */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
+    *a /= b;
 }
 
 float fPower(float a, float b) {
     /* Function pangkat */
     /* Asumsi b adalah int */
     /* Mengembalikan value a ^ b */
+    int res = 1;
+    for(int i=0;i<b;i++){
+        res*=a;
+    }
+    return res;
 }
 
 void pPower(float *a, float b) {
@@ -62,6 +69,10 @@ void pPower(float *a, float b) {
     /* Asumsi b adalah int */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a ^ b */
+    int res = a;
+    for(int i=0;i<b;i++){
+        *a *= res;
+    }
 }
 
 int main() {

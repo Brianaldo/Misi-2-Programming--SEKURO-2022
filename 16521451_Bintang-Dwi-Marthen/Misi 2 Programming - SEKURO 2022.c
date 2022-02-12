@@ -57,7 +57,7 @@ float fPower(float a, float b) {
     /* Function pangkat */
     /* Asumsi b adalah int */
     /* Mengembalikan value a ^ b */
-    int res = 1;
+    float res = 1;
     for(int i=0;i<b;i++){
         res*=a;
     }
@@ -69,8 +69,8 @@ void pPower(float *a, float b) {
     /* Asumsi b adalah int */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a ^ b */
-    int res = a;
-    for(int i=0;i<b;i++){
+    float res = *a;
+    for(int i=0;i<b-1;i++){
         *a *= res;
     }
 }

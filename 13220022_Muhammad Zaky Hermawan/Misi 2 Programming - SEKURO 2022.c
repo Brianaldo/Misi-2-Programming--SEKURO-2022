@@ -14,7 +14,7 @@ float fPlus(float a, float b) {
     return a + b;
 }
 
-void pPlus(float *a, float b) {
+void pPlus(float* a, float b) {
     /* Procedure tambah */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a + b */
@@ -27,7 +27,7 @@ float fMin(float a, float b) {
     return a - b;
 }
 
-void pMin(float *a, float b) {
+void pMin(float* a, float b) {
     /* Procedure kurang */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a - b */
@@ -40,7 +40,7 @@ float fTimes(float a, float b) {
     return a * b;
 }
 
-void pTimes(float *a, float b) {
+void pTimes(float* a, float b) {
     /* Procedure kali */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
@@ -53,17 +53,19 @@ float fDivide(float a, float b) {
     if (b == 0) {
         perror("Tidak dapat membagi dengan nol");
         errCode.code = -1;
+        return 0.0;
     }
     return a / b;
 }
 
-void pDivide(float *a, float b) {
+void pDivide(float* a, float b) {
     /* Procedure bagi */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
     if (b == 0) {
         perror("Tidak dapat membagi dengan nol");
         errCode.code = -1;
+        return;
     }
     *a /= b;
 }
@@ -76,13 +78,13 @@ float fPower(float a, float b) {
     if (b == 0) {
         return 1;
     }
-    for (size_t i = 0; i < c-1; ++i) {
+    for (size_t i = 0; i < c - 1; ++i) {
         a *= a;
-   }
+    }
     return a;
 }
 
-void pPower(float *a, float b) {
+void pPower(float* a, float b) {
     /* Procedure pangkat */
     /* Asumsi b adalah int */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
@@ -111,10 +113,10 @@ void tukar(float* a, float* b) {
 
 int main() {
     /* Buatlah kalkulator integral menggunakan konsep Integral Riemann */
-    /* Notes: Penggunaan operator aritmatika harus menggunakan fungsi dan 
+    /* Notes: Penggunaan operator aritmatika harus menggunakan fungsi dan
               prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
-    /* Input dan output dibebaskan kepada Cakru URO 14 */
-    /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
+              /* Input dan output dibebaskan kepada Cakru URO 14 */
+              /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
     errCode.code = 0;
     int max_deg;
     int koef[1024];
@@ -123,11 +125,11 @@ int main() {
     scanf("%d", &max_deg);
     if (max_deg < 0) {
         perror("Derajat maksimum polinomial tidak boleh negatif");
-        exit(1);
+        return 1;
     }
     if (max_deg >= 1024) {
         perror("Derajat maksimum polinomial tidak boleh melebihi 1023");
-        exit(1);
+        return 1;
     }
     for (int i = max_deg; i >= 0; i = (int)fMin((float)i, 1)) {
         printf("Masukkan koefisien dari x^%d: ", i);

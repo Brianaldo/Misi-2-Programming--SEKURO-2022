@@ -53,25 +53,47 @@ void pDivide(float *a, float b) {
     *a /= b;
 }
 
-float fPower(float a, float b) {
+float fPower(float a, int b) {
     /* Function pangkat */
     /* Asumsi b adalah int */
     /* Mengembalikan value a ^ b */
     float res = 1;
-    for(int i=0;i<b;i++){
-        res*=a;
+    if (b==0){
+        for (int i=0;i<b;i++){
+            res=fTimes(res,a);
+        }
+    }
+    else if (b>0){
+        for (int i=0;i<b;i++){
+            res=fTimes(res,a);
+        }
+    }
+    else{
+        for (int i=0;i>b;i--){
+            res=fDivide(res,a);
+        }
     }
     return res;
 }
 
-void pPower(float *a, float b) {
+void pPower(float *a, int b) {
     /* Procedure pangkat */
     /* Asumsi b adalah int */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a ^ b */
     float res = *a;
-    for(int i=0;i<b-1;i++){
-        *a *= res;
+    if(b==0){
+        *a *= 0, *a += 1;
+    }
+    else if(b>0){
+        for(int i=0;i<b-1;i++){
+            *a *= res;
+        }
+    }
+    else{
+        for(int i=0;i>b;i--){
+            *a /= res;
+        }
     }
 }
 
@@ -81,5 +103,28 @@ int main() {
               prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
+
+    // Terdapat asumsi bahwa pangkat suatu suku selalu bilangan bulat
+
+    //Input
+    // printf("Program akan menghitung integral dengan konsep Integral Riemann Kanan\n");
+    // printf("Masukkan fungsi dengan bentuk [koefisien]X[pangkat] tanpa spasi\n");
+    // printf("Akhiri fungsi dengan tanda '.'"); //Memudahkan untuk mencari akhir dari fungsi
+    // printf("Sebagai contoh: 1x2+3x+2.\n");
+    // printf("Masukkan fungsi: ");
+    // char fx[50];
+    // scanf("%49s", &fx);
+    // float bb,ba;
+    // printf("Masukkan batas bawah integral: ")
+    // scanf("%f", &bb);
+    // printf("Masukkan batas atas integral: ")
+    // scanf("%f", &ba);
+    
+    // Test Fungsi Pangkat
+    // float a,b;
+    // scanf("%f %f", &a, &b);
+    // pPower(&a,b);
+    // printf("%f", a);
+
     return 0;
 }

@@ -11,39 +11,46 @@ void pPlus(float *a, float b) {
     /* Procedure tambah */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a + b */
+    *a += b;
 }
 
 float fMin(float a, float b) {
     /* Function kurang */
     /* Mengembalikan value a + b */
+    return a - b;
 }
 
 void pMin(float *a, float b) {
     /* Procedure kurang */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a - b */
+    *a -= b;
 }
 
 float fTimes(float a, float b) {
     /* Function kali */
     /* Mengembalikan value a * b */
+    return a * b;
 }
 
 void pTimes(float *a, float b) {
     /* Procedure kali */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
+    *a *= b;
 }
 
 float fDivide(float a, float b) {
     /* Function bagi */
     /* Mengembalikan value a / b */
+    return a / b;
 }
 
 void pDivide(float *a, float b) {
     /* Procedure bagi */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
+    *a /= b;
 }
 
 float fPower(float a, float b) {

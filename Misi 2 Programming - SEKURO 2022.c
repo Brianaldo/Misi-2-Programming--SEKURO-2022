@@ -4,6 +4,7 @@
 float fPlus(float a, float b) {
     /* Function tambah */
     /* Mengembalikan value a + b */
+    return a + b;
 }
 
 void pPlus(float *a, float b) {

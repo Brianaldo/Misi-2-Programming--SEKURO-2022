@@ -118,11 +118,11 @@ int main() {
     {
         if(i==fMin(n,1))
         {
-            printf("%.1fx+", koef[n-1]);
+            printf("%.1fx + ", koef[n-1]);
         }
         else if(i!=n)
         {
-            printf("%.1fx^%.0f+", koef[i], fMin(n,i)); 
+            printf("%.1fx^%.0f + ", koef[i], fMin(n,i)); 
         }
         else
         {

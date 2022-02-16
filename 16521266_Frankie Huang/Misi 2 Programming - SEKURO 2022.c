@@ -73,27 +73,23 @@ void pPower(float *a, float b) {
     }
 }
 
-// Mengembalikan nilai hasil kali koefisien suatu penjumlahan riemann
-float pascal(float coefficient, float lowerBound, float upperBound, int n)
+int pascal(int r, int c)
 {
-    // Tabel segitiga pascal
-    int p[11][11] = {{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                     {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                     {1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                     {1, 3, 3, 1, 0, 0, 0, 0, 0, 0, 0},
-                     {1, 4, 6, 4, 1, 0, 0, 0, 0, 0, 0},
-                     {1, 5, 10, 10, 5, 1, 0, 0, 0, 0, 0},
-                     {1, 6, 15, 20, 15, 6, 1, 0, 0, 0, 0},
-                     {1, 7, 21, 35, 35, 21, 7, 1, 0, 0, 0},
-                     {1, 8, 28, 56, 70, 56, 28, 8, 1, 0, 0},
-                     {1, 9, 36, 84, 126, 126, 84, 36, 9, 1, 0},
-                     {1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1}};
+    /* Mengembalikan bilangan pascal pada baris ke-r dan kolom ke-c. Penomoran dimulai dari 0 */
+    if (c == 0 || c == r)
+        return 1;
+    else
+        return (fPlus(pascal((r-1), (c-1)), pascal((r-1), c)));
+}
 
+float totalSum(float coefficient, float lowerBound, float upperBound, int n)
+{
+    /* Mengembalikan nilai penjumlahan total dari suatu koefisien pangkat x */
     float sum = 0;
 
     for (int i = n; i >= 0; i--)
     {
-        pPlus(&sum, fDivide(fTimes(fTimes(fTimes(fPower(lowerBound, n-i), p[n][i]), coefficient), fPower((upperBound-lowerBound), i+1)), (i+1)));
+        pPlus(&sum, fDivide(fTimes(fTimes(fTimes(fPower(lowerBound, n-i), pascal(n, i)), coefficient), fPower((upperBound-lowerBound), i+1)), (i+1)));
     }
 
     return sum;
@@ -108,18 +104,9 @@ int main() {
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
 
 
-    /*
-    Batas atas derajat koefisien integral riemann adalah 10
-    Untuk suatu fungsi ax^n+bx^(n-1)+cx^(n-2)+...+k dengan batas atas x dan batas bawah y, jumlah limit riemann dapat didefinisikan sebagai
-    (1/n)*p(a,n,n)*(x-y)^n + (1/(n-1))*p(a,n-1,n)*(x-y)^(n-1)+ ....+
-    dengan fungsi p(a, i, n) mengembalikan koefisien segitiga pascal ke (n+1) pada posisi ke-i dari kiri.
-    */
-
-    // Deklarasi variabel
     float lowerBound, upperBound, sum = 0;
     int n;
 
-    // Input nilai dan deklarasi variabel pangkat
     printf("Batas bawah integral\t\t= ");
     scanf("%f", &lowerBound);
     printf("Batas atas integral\t\t= ");
@@ -132,21 +119,19 @@ int main() {
     for (int i = 0; i <= n; i++)
     {
         if (n-i == 1)
-            printf("Koefisien pangkat 1\t= ");
+            printf("Koefisien pangkat 1\t\t= ");
         else if (n-i == 0)
-            printf("Nilai konstanta\t\t= ");
+            printf("Nilai konstanta\t\t\t= ");
         else
-            printf("Koefisien pangkat %d\t= ", n-i);
+            printf("Koefisien pangkat %d\t\t= ", n-i);
         scanf("%f", &c[i]);
     }
 
-    // Loop untuk menjumlahkan nilai sum
     for (int i = 0; i <= n; i++)
     {
-        pPlus(&sum, pascal(c[i], lowerBound, upperBound, n-i));
+        pPlus(&sum, totalSum(c[i], lowerBound, upperBound, n-i));
     }
 
-    // Output nilai
     printf("Nilai integral\t\t= %f", sum);
 
     return 0;

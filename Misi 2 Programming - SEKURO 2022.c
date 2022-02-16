@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-// Compile with: gcc "Misi 2 Programming - SEKURO 2022.c" -o <executable_name>
-// Run with ./<executable_name>
-// The spaces in the file name suck
-
 float fPlus(float a, float b)
 {
     /* Function tambah */

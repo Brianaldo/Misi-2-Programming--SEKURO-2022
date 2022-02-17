@@ -131,13 +131,13 @@ int main() {
 
     printf("\n");
 
-    degree++;
+    degree = fPlus(degree, 1);
 
     /* Input coefficient for each x^n and constant */
 
     float coeff[degree];
 
-    for (int i = degree - 1; i >= 0; i--) {
+    for (int i = fMin(degree, 1); i >= 0; i--) {
         switch (i) {
             case 0:
                 printf("Constant: ");
@@ -169,7 +169,7 @@ int main() {
     printf("Number of rectangles: ");
     scanf("%d", &n);
 
-    deltax = (b - a) / n;
+    deltax = fDivide(fMin(b, a), n);
 
     /* Choosing Riemann sum method */
 
@@ -193,11 +193,12 @@ int main() {
     for (int j = 1; j <= n; j++) {
 
         if (riemannMethod == 1) {
-            riemannSum += fx(degree, coeff, a + (j - 1) * deltax);
+            pPlus(&riemannSum, fx(degree, coeff, fPlus(a, fTimes(fMin(j, 1), deltax))));
         } else if (riemannMethod == 2) {
-            riemannSum += fx(degree, coeff, ((a + (j - 1) * deltax) + (a + j * deltax)) / 2);
+            pPlus(&riemannSum, fx(degree, coeff, fPlus(a, fTimes(fMin(j, 1), deltax))));
+            riemannSum += fx(degree, coeff, fDivide(fPlus(a, fTimes(fMin(j, 1), deltax)) + fPlus(a, fTimes(j, deltax)), 2));
         } else if (riemannMethod == 3) {
-            riemannSum += fx(degree, coeff, a + j * deltax);
+            riemannSum += fx(degree, coeff, fPlus(a, fTimes(j, deltax)));
         }
 
     }
@@ -206,7 +207,7 @@ int main() {
 
     /* Displaying the result */
 
-    printf("Result: %f", deltax * riemannSum);
+    printf("Result: %f", fTimes(deltax, riemannSum));
 
     return 0;
 }

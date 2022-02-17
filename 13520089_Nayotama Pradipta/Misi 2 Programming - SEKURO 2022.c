@@ -70,6 +70,8 @@ void pDivide(float *a, float b) {
     /* F.S. a menjadi a / b */
     if (b != 0){
         *a /= b;
+    } else {
+        return 0;
     }
 }
 

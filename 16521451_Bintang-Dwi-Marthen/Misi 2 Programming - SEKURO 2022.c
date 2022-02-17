@@ -106,7 +106,7 @@ int main() {
     scanf("%f", &bawah);
     printf("Masukkan batas atas: ");
     scanf("%f", &atas);
-    printf("Masukkan nilai n: ");
+    printf("Masukkan jumlah interval: ");
     scanf("%d", &partisi);
     jarak = fDivide(fMin(atas,bawah),partisi);
     printf("Untuk mengakhiri input, masukkan koefisien dengan -9999\n");

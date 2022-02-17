@@ -96,7 +96,7 @@ void pPower(float *a, float b) {
 
 }
 
-float fx(int degree, float coeff[degree], float x) {
+float polynomial(int degree, float coeff[degree], float x) {
 
     float fx;
 
@@ -108,6 +108,13 @@ float fx(int degree, float coeff[degree], float x) {
 
     return fx;
 
+}
+
+void swap(float *a, float *b) {
+    float c = *a;
+
+    *a = *b;
+    *b = c;
 }
 
 int main() {
@@ -166,6 +173,14 @@ int main() {
     printf("Upper bound: ");
     scanf("%f", &b);
 
+    bool reverse = false;
+
+    if (a > b) {
+        swap(&a, &b);
+
+        reverse = true;
+    }
+
     printf("Number of rectangles: ");
     scanf("%d", &n);
 
@@ -193,12 +208,11 @@ int main() {
     for (int j = 1; j <= n; j++) {
 
         if (riemannMethod == 1) {
-            pPlus(&riemannSum, fx(degree, coeff, fPlus(a, fTimes(fMin(j, 1), deltax))));
+            pPlus(&riemannSum, polynomial(degree, coeff, fPlus(a, fTimes(fMin(j, 1), deltax))));
         } else if (riemannMethod == 2) {
-            pPlus(&riemannSum, fx(degree, coeff, fPlus(a, fTimes(fMin(j, 1), deltax))));
-            riemannSum += fx(degree, coeff, fDivide(fPlus(a, fTimes(fMin(j, 1), deltax)) + fPlus(a, fTimes(j, deltax)), 2));
+            pPlus(&riemannSum, polynomial(degree, coeff, fDivide(fPlus(fPlus(a, fTimes(fMin(j, 1), deltax)), fPlus(a, fTimes(j, deltax))), 2)));
         } else if (riemannMethod == 3) {
-            riemannSum += fx(degree, coeff, fPlus(a, fTimes(j, deltax)));
+            pPlus(&riemannSum, polynomial(degree, coeff, fPlus(a, fTimes(j, deltax))));
         }
 
     }
@@ -207,7 +221,11 @@ int main() {
 
     /* Displaying the result */
 
-    printf("Result: %f", fTimes(deltax, riemannSum));
+    if (reverse == true) {
+        pTimes(&riemannSum, -1);
+    }
+
+    printf("Result: %.4f", fTimes(deltax, riemannSum));
 
     return 0;
 }

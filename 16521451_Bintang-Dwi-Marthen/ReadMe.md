@@ -1,0 +1,1 @@
+![SS Hasil Run](https://github.com/Marthenn/Misi-2-Programming--SEKURO-2022/blob/main/16521451_Bintang-Dwi-Marthen/hasil%20run.jpg)

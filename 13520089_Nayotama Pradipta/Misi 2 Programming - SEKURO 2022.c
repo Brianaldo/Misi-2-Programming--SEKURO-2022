@@ -57,9 +57,43 @@ float fDivide(float a, float b)
 {
     /* Function bagi */
     /* Mengembalikan value a / b */
-    return a / b;
+    if (b != 0){
+        return a / b;
+    } else {
+        return 0;
+    }
 }
 
+void pDivide(float *a, float b) {
+    /* Procedure bagi */
+    /* I.S. a dan b terdefinisi dan tidak sembarang */
+    /* F.S. a menjadi a / b */
+    if (b != 0){
+        *a /= b;
+    }
+}
+
+float fPower(float a, float b) {
+    /* Function pangkat */
+    /* Asumsi b adalah int */
+    /* Mengembalikan value a ^ b */
+    int c = a;
+    for (int i = 0; i < b - 1; i++){
+        a *= c;
+    }
+    return a;
+}
+
+void pPower(float *a, float b) {
+    /* Procedure pangkat */
+    /* Asumsi b adalah int */
+    /* I.S. a dan b terdefinisi dan tidak sembarang */
+    /* F.S. a menjadi a ^ b */
+    float c = *a;
+    for (int i = 0; i < b; i++){
+        *a *= c;
+    }
+}
 
 // Buat Fungsi/Prosedur Tambahan Supaya mainnya rapih
 // Semua operasi aritmatika tetap menggunakan fungsi yang di atas

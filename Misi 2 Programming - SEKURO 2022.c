@@ -1,3 +1,10 @@
+/*
+    Nama                : Nayotama Pradipta 
+    NIM                 : 13520089
+    Deskripsi Program   : Kalkulator Riemann Integral 
+*/
+
+
 #include <stdio.h>
 #include <stdbool.h>
 

@@ -71,7 +71,7 @@ float fPower(float a, float b) {
     aPowb = a;
 
     for (int i = 2; i <= b; i++) {
-        pTimes(&aPowb, b);
+        pTimes(&aPowb, a);
     }
 
     return aPowb;
@@ -89,10 +89,24 @@ void pPower(float *a, float b) {
     aPowb = *a;
 
     for (int i = 2; i <= b; i++) {
-        pTimes(&aPowb, b);
+        pTimes(&aPowb, *a);
     }
 
     *a = aPowb;
+
+}
+
+float fx(int degree, float coeff[degree], float x) {
+
+    float fx;
+
+    fx = coeff[0];
+
+    for (int j = 1; j < degree; j++) {
+        fx += coeff[j] * fPower(x, j);
+    }
+
+    return fx;
 
 }
 
@@ -102,6 +116,97 @@ int main() {
               prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
+
+    printf("Riemann Sum Integral Approximation\n");
+    printf("Polynomial Function\n");
+
+    printf("\n");
+
+    /* Setting up the function */
+
+    int degree;
+
+    printf("Degree of polynomial: ");
+    scanf("%d", &degree);
+
+    printf("\n");
+
+    degree++;
+
+    /* Input coefficient for each x^n and constant */
+
+    float coeff[degree];
+
+    for (int i = degree - 1; i >= 0; i--) {
+        switch (i) {
+            case 0:
+                printf("Constant: ");
+                break;
+            case 1:
+                printf("Coefficient of x: ");
+                break;
+            default:
+                printf("Coefficient of x^%d: ", i);
+                break;
+        }
+
+        scanf("%f", &coeff[i]);
+    }
+
+    printf("\n");
+
+    /* Setting up the Riemann sum for integral approximation */
+    /* Setting lower and upper bound of integral and number of rectangle(s) */
+    float a, b, deltax;
+    int n;
+
+    printf("Lower bound: ");
+    scanf("%f", &a);
+
+    printf("Upper bound: ");
+    scanf("%f", &b);
+
+    printf("Number of rectangles: ");
+    scanf("%d", &n);
+
+    deltax = (b - a) / n;
+
+    /* Choosing Riemann sum method */
+
+    int riemannMethod;
+
+    printf("\n");
+
+    printf("Choose a Riemann sum method\n");
+    printf("--------------------------------------------------------------------\n");
+    printf("1: Left Riemann Sum\n");
+    printf("2: Midpoint Riemann Sum\n");
+    printf("3: Right Riemann Sum\n");
+    printf("--------------------------------------------------------------------\n");
+    printf("Method: ");
+    scanf("%d", &riemannMethod);
+
+    /* Calculating the Riemann sum */
+
+    float riemannSum = 0;
+
+    for (int j = 1; j <= n; j++) {
+
+        if (riemannMethod == 1) {
+            riemannSum += fx(degree, coeff, a + (j - 1) * deltax);
+        } else if (riemannMethod == 2) {
+            riemannSum += fx(degree, coeff, ((a + (j - 1) * deltax) + (a + j * deltax)) / 2);
+        } else if (riemannMethod == 3) {
+            riemannSum += fx(degree, coeff, a + j * deltax);
+        }
+
+    }
+
+    printf("\n");
+
+    /* Displaying the result */
+
+    printf("Result: %f", deltax * riemannSum);
 
     return 0;
 }

@@ -83,7 +83,7 @@ void displayFunction(int *koef, int derajat)
         } else {
             if (koef[i] != 0){
                 if (koef[i] != 1 && koef[i] != -1){
-                    printf("%dx^%d + ", koef[i], i);
+                    printf("%dx + ", koef[i], i);
                 } else {
                     if (koef[i] == 1){
                         printf("x + ");

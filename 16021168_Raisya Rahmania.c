@@ -99,7 +99,7 @@ int main() {
 
     }
     float hasil_riemann = fTimes(hasil,dx);
-    printf("%f", hasil_riemann);
+    printf("Hasil integral riemann = %f ", hasil_riemann);
 
 
     return 0;

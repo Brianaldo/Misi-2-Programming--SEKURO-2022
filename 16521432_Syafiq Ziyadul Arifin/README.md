@@ -10,4 +10,4 @@ Di misi ke-2 SEKURO ini, saya membuat program menggunakan Bahasa C yang akan men
 
 ![](https://latex.codecogs.com/svg.image?\int_{a}^{b}f(x)dx&space;\approx&space;\frac{\Delta&space;x}{2}(f(a)&plus;2f(a&plus;\Delta&space;x)&plus;2f(a&plus;2\Delta&space;x)&plus;...&plus;f(b)))
 
-Di gambar di atas, digunakan contoh f(x)nya adalah ![](https://latex.codecogs.com/svg.image?x^{2}&plus;2x) dengan batas bawah dan batas atas integralnya berturut-turut adalah 0 dan 3, serta dibagi menjadi 2 partisi.
+Di gambar di atas, digunakan contoh f(x)nya adalah ![](https://latex.codecogs.com/svg.image?x^{2}&plus;2x) dengan batas bawah dan batas atas integralnya berturut-turut adalah 0 dan 3, serta dibagi menjadi 2 partisi. Setelah dihitung, hasilnya adalah 19,125.

@@ -36,7 +36,7 @@ void pDivide(float *a, float b) {
 float fPower(float a, int b) {
     int i = 0;
     float v = a;
-    for (i=0;i<b;i++){
+    for (i=0;i<b-1;i++){
         v *= a ;        
     }
     return v;
@@ -45,31 +45,38 @@ float fPower(float a, int b) {
 void pPower(float *a, int b) {
     int i = 0;
     float v = *a;
-    for (i=0;i<b;i++){
+    for (i=0;i<b-1;i++){
         *a *= v ;
     }
 }
 
-int main() {
-    int N = 100;
-    float i = 0;
-    float a = -2; 
-    float b = 2;
-    float sum = 0;
-    float y = 0;
-    float p =0;
+int main()
+{
+    int a,b,p,i;
+    printf("Program ini menghitung integral (ox^p)+q dengan o,p dan q adalah input dari user \n"); 
+    printf("Masukkan batas [a,b]: \n");
+    printf("a : ");
+    scanf("%d", &a);
+    printf("b : ");
+    scanf("%d", &b);
+    float z,o,q,y,sum;
+    int N = 1000;
+    z =b-a;
+    z =z/N;
     float x =a;
-    float z =0;
-    p = fMin(b,a);
-    p = fDivide(p,N);
-    printf("Program integral Riemann dengan batas [-2,2] \n");
-    printf("Program ini menghitung integral -x^2+4 \n"); 
+    printf("o : ");
+    scanf("%f", &o);
+    printf("p : ");
+    scanf("%d", &p);
+    printf("q : ");
+    scanf("%f", &q);
     for (i = 0; i<N; i++){
-        z = fTimes(x,x);
-        y = fPlus(-z,4);
-        z = fTimes(y,p);
-        sum = fPlus(z,sum);
-        x = fPlus(x,p);
+        y = fPower(x,p);
+        y = fTimes(y,o);
+        y = fPlus(y,q);
+        y = fTimes(y,z);
+        sum = fPlus(y,sum);
+        x = fPlus(x,z);
     }
     printf("Hasil perhitungan integral diatas adalah = %f\n",sum);
     return 0;

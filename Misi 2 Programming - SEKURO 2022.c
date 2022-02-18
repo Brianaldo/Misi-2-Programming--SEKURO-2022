@@ -83,9 +83,48 @@ int main() {
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
 
+    printf("-----------------------KALKULATOR INTEGRAL REIMANN (KIRI)-----------------------\n");
+
+    int derajat;
+    printf("Masukkan derajat polinom: ");
+    scanf("%d", &derajat);
+
+    float fungsi[derajat];
+    for (int i = 1; i <= derajat+1; i++){
+        printf("Masukkan koefisien x derajat ke %d : ",(i-1));
+        scanf("%f", &fungsi[i]);
+    }
 
 
+    float a; // batas bawah
+    float b; // batas atas
+    float N; // partisi
+    printf("masukkan batas bawah: ");
+    scanf("%f", &a);
+    printf("masukkan batas atas: ");
+    scanf("%f", &b);
+    printf("masukkan banyak partisi: ");
+    scanf("%f", &N);
 
+    float dx = fDivide(fMin(b,a),N); //panjang partisi
+    float hasil = 0; 
+    float x = 0; 
     
+
+    //untuk perhitungan reimannya saya masih bingung :(
+   for (int i = 0; i < N; i++) {
+            x = fPlus(a, fTimes(fMin(b, a), fDivide(i, N)));
+
+            for (int j = 0; j < derajat; j++) {
+
+            pPlus(&hasil, fTimes(fungsi[j], fPower(x, j)));
+
+            }
+        }
+    pTimes(&hasil, fDivide(fMin(b, a), N));
+ 
+
+
+    printf("%f", hasil);
     return 0;
 }

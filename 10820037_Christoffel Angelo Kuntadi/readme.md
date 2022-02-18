@@ -1,1 +1,1 @@
-![](https://i.ibb.co/HhGFhDK/hasil-run.jpg)
+![](https://i.ibb.co/cJVxr9v/ini-jadinya-yey.jpg)

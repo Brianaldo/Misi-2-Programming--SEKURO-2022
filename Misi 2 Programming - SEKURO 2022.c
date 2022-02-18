@@ -11,12 +11,12 @@ void pPlus(float *a, float b) {
     /* Procedure tambah */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a + b */
-    return *a += b;
+    *a += b;
 }
 
 float fMin(float a, float b) {
     /* Function kurang */
-    /* Mengembalikan value a + b */
+    /* Mengembalikan value a - b */
     return a - b;
 }
 
@@ -24,7 +24,7 @@ void pMin(float *a, float b) {
     /* Procedure kurang */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a - b */
-    return *a -= b;
+    *a -= b;
 }
 
 float fTimes(float a, float b) {
@@ -37,7 +37,7 @@ void pTimes(float *a, float b) {
     /* Procedure kali */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
-    return *a *= b;
+    *a *= b;
 }
 
 float fDivide(float a, float b) {
@@ -50,13 +50,14 @@ void pDivide(float *a, float b) {
     /* Procedure bagi */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a * b */
-    return *a /= b;
+    *a /= b;
 }
 
 float fPower(float a, float b) {
     /* Function pangkat */
     /* Asumsi b adalah int */
     /* Mengembalikan value a ^ b */
+    int i;
     int pangkat = 1;
     for (i = 0; i < b; i++){
         pangkat = pangkat * a;
@@ -68,13 +69,12 @@ void pPower(float *a, float b) {
     /* Asumsi b adalah int */
     /* I.S. a dan b terdefinisi dan tidak sembarang */
     /* F.S. a menjadi a ^ b */
+    int i;
     int pangkat = 1;
-    int *a;
     for (i = 0; i < b; i++){
-        pangkat = pangkat * a;
+        pangkat = *a * pangkat;
     } 
-    a = &pangkat;
-    return *a;
+    *a = pangkat;
 }
 
 int main() {
@@ -84,6 +84,33 @@ int main() {
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
     
+    /* Main Program */
+	//Input
+	int a,b,n;
+	int koefisien,pangkat,partisi;
+	printf("Enter a: ");
+	scanf("%d", &a);
+	printf("Enter b: ");
+	scanf("%d", &b);
+	printf("Given a function f(x) = Ax^B\n");
+	printf("Enter A: ");
+	scanf("%d", &koefisien);
+	printf("Enter B: ");
+	scanf("%d", &pangkat);
+	printf("Enter n (Partition): ");
+	scanf("%d", &partisi);
+	
+	//Program
+	float deltaX = fDivide(fMin(b,a),partisi);
+	float jlh = 0;
+	float y;
+	for (float i = a; i <= b; i+=deltaX){
+		y = fTimes(koefisien,fPower(i,pangkat));
+		jlh = fPlus(jlh,fTimes(deltaX,y));
+	}
+	
+	//Output
+	printf("Jumlah Riemann = %f\n", jlh);
     return 0;
 }
 

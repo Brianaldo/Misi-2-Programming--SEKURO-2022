@@ -1,1 +1,1 @@
-![ss hasil run]("hasil run.png")
+![ss hasil run](hasil run.png)

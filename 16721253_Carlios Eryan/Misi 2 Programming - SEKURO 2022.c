@@ -80,28 +80,9 @@ void pPower(float *a, float b) {
     *a = result;
 }
 
-int main() {
-    /* Buatlah kalkulator integral menggunakan konsep Integral Riemann */
-    /* Notes: Penggunaan operator aritmatika harus menggunakan fungsi dan 
-              prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
-    /* Input dan output dibebaskan kepada Cakru URO 14 */
-    /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
-
-    printf("Selamat datang di program Integral Riemann\n\n");
-    printf("Masukkan derajat maksimum: ");
-    int n;
-    scanf("%d", &n);
-    int i;
-    float koef[n];
-    float a,b;
-    int iterasi;
-    int j;
-    float dx;
-    float result;
-    float x;
-
-    
-    i = 0;
+void inputKoef(int n, float koef[])
+{
+    int i = 0;
     while(i <= n)
     {
         float temp = i;
@@ -111,11 +92,16 @@ int main() {
         i = temp;
         
     }
+}
 
-
+void printFx(int n, float koef[])
+{
+    int i = 0;
     printf("\nFungsi Anda: f(x) = ");
-    for(i=0;i<=n;i++)
+    while(i<=n)
     {
+        float temp = i;
+        
         if(i==fMin(n,1))
         {
             printf("%.1fx + ", koef[n-1]);
@@ -128,26 +114,20 @@ int main() {
         {
             printf("%.1f", koef[n]);
         }
+
+        pPlus(&temp, 1);
+        i = temp;
     }
     printf("\n\n");
-    
+}
 
-    printf("Masukkan batas atas dan bawah\n");
-    printf("Batas bawah: ");
-    scanf("%f", &a);
-    printf("Batas atas: ");
-    scanf("%f", &b);
-
-
-    
-
-
-    printf("Masukkan jumlah iterasi: ");
-    scanf("%d", &iterasi);
-
-
-    dx = fDivide((fMin(b,a)),iterasi);
-    result = 0;
+float calcRiemann(int n, float koef[], float a, float b, int iterasi)
+{
+    int i;
+    int j;
+    float x;
+    float dx = fDivide((fMin(b,a)),iterasi);
+    float result = 0;
 
     i = 0;
     j = 0;
@@ -170,7 +150,46 @@ int main() {
         pPlus(&temp, 1);
         i = temp;
     }
+    return result;
+}
 
+int main() {
+    /* Buatlah kalkulator integral menggunakan konsep Integral Riemann */
+    /* Notes: Penggunaan operator aritmatika harus menggunakan fungsi dan 
+              prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
+    /* Input dan output dibebaskan kepada Cakru URO 14 */
+    /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
+
+    printf("Selamat datang di program Integral Riemann\n\n");
+    printf("Masukkan derajat maksimum: ");
+    int n;
+    scanf("%d", &n);
+    float koef[n];
+    float a,b;
+    int iterasi;
+    float result;
+
+    // Input koefisien fungsi polinom
+    inputKoef(n, koef);
+
+    // Print bentuk fungsi f(x)
+    printFx(n, koef);
+
+    //Input batas atas (a) batas bawah (b)    
+    printf("Masukkan batas atas dan bawah\n");
+    printf("Batas bawah: ");
+    scanf("%f", &a);
+    printf("Batas atas: ");
+    scanf("%f", &b);
+
+    // Input berapa banyak iterasi  (semakin tinggi semakin baik)
+    printf("Masukkan jumlah iterasi: ");
+    scanf("%d", &iterasi);
+
+    // Menghitung integral Riemann
+    result = calcRiemann(n, koef, a, b, iterasi);
+
+    // Output hasil hitung integral Riemann
     printf("Hasil penjumlahaan riemann = %f", result);
 
     return 0;

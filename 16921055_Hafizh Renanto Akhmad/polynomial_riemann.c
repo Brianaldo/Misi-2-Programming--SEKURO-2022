@@ -98,15 +98,15 @@ void pPower(float *a, float b) {
 
 float polynomial(int degree, float coeff[degree], float x) {
 
-    float fx;
+    float px;
 
-    fx = coeff[0];
+    px = coeff[0];
 
     for (int j = 1; j < degree; j++) {
-        fx += coeff[j] * fPower(x, j);
+        px += coeff[j] * fPower(x, j);
     }
 
-    return fx;
+    return px;
 
 }
 
@@ -126,6 +126,7 @@ int main() {
 
     printf("Riemann Sum Integral Approximation\n");
     printf("Polynomial Function\n");
+    printf("p(x) = a0 + a1.x + a2.x^2 + ... + an.x^n");
 
     printf("\n");
 
@@ -133,14 +134,17 @@ int main() {
 
     int degree;
 
+    printf("\n");
+
     printf("Degree of polynomial: ");
     scanf("%d", &degree);
 
     printf("\n");
 
     degree = fPlus(degree, 1);
+    // As array in C starts from 0, and we'll be using the degree for the index of array of coefficient as well, the +1 is needed
 
-    /* Input coefficient for each x^n and constant */
+    /* Input coefficient for each x^i {i = [0, degree - 1]} and constant */
 
     float coeff[degree];
 
@@ -162,10 +166,81 @@ int main() {
 
     printf("\n");
 
+    /* Setting the new degree if some of the highest degree is zero */
+    int k = fMin(degree, 1);
+
+    while (k > 0 && coeff[k] == 0) {
+        k = fMin(k, 1);
+    }
+
+    bool degree_change = false;
+
+    if (fMin(degree, 1) != k) {
+        degree_change = true;
+    }
+
+    degree = fPlus(k, 1);
+
+    /* Displaying the polynomial function p(x) */
+
+    if (degree_change == true) {
+        printf("Some of the input is not valid, making the degree of function decreases.\n");
+        printf("Degree of polynomial: %.0f\n", fMin(degree, 1));   
+    }
+
+    printf("p(x) = ");
+
+    for (int i = 0; i < degree; i++) {
+        if (i == 0) {
+            if (degree == 1) {
+                printf("%.f", coeff[i]);
+            } else {
+                if (coeff[i] == 0) {
+                } else {
+                    printf("%.f + ", coeff[i]);
+                }
+            }
+        } else if (i > 0 && i < fMin(degree, 1)) {
+            if (coeff[i] == 0) {
+            } else if (coeff[i] == 1) {
+                if (i == 1) {
+                    printf("x + ", i);
+                } else {
+                    printf("x^%d + ", i);
+                }
+            } else {
+                if (i == 1) {
+                    printf("%.fx + ", coeff[i], i);
+                } else {
+                    printf("%.fx^%d + ", coeff[i], i);
+                }
+            }
+        } else {
+            if (coeff[i] == 0) {
+            } else if (coeff[i] == 1) {
+                if (i == 1) {
+                    printf("x", i);
+                } else {
+                    printf("x^%d", i);
+                }
+            } else {
+                if (i == 1) {
+                    printf("%.fx", coeff[i], i);
+                } else {
+                    printf("%.fx^%d", coeff[i], i);
+                }
+            }      
+        }
+    }
+
+    printf("\n");
+
     /* Setting up the Riemann sum for integral approximation */
     /* Setting lower and upper bound of integral and number of rectangle(s) */
     float a, b, deltax;
     int n;
+
+    printf("\n");
 
     printf("Lower bound: ");
     scanf("%f", &a);
@@ -198,8 +273,19 @@ int main() {
     printf("2: Midpoint Riemann Sum\n");
     printf("3: Right Riemann Sum\n");
     printf("--------------------------------------------------------------------\n");
-    printf("Method: ");
-    scanf("%d", &riemannMethod);
+    
+    /* Anticipating error of non-valid options */
+
+    while (riemannMethod > 3 || riemannMethod < 1) {
+        printf("Method: ");
+        scanf("%d", &riemannMethod);
+
+        if (riemannMethod > 3 || riemannMethod < 1) {
+            printf("\n");
+
+            printf("Please input a valid option.\n");
+        }
+    }
 
     /* Calculating the Riemann sum */
 

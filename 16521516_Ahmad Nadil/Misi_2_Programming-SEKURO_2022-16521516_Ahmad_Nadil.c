@@ -1,3 +1,6 @@
+/* Nama : Ahmad Nadil */
+/* NIM : 16521516 */
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -76,6 +79,22 @@ void pPower(float *a, float b) {
     }
     *a = hasil;
 }
+// Fungsi Riemann Trapeozoid
+float riemannTrapezoid(float a, float b, float h, float (*f)(float, float)) {
+    /* Fungsi riemann trapezoid */
+    /* Mengembalikan nilai integral dari fungsi f dengan batas a, b, dan h */
+    /* a adalah batas bawah, b adalah batas atas, h adalah tinggi trapesium */
+    float hasil = 0;
+    float x;
+    for (x = a; x < b; x = x + h) {
+        hasil = fPlus(hasil,f(x, h));
+    }
+    hasil = fPlus(hasil,f(a, h));
+    hasil = fPlus(hasil, f(b,h));
+    hasil = fTimes(hasil,h);
+    hasil = fDivide(hasil,2);
+    return hasil;
+}
 
 int main() {
     /* Buatlah kalkulator integral menggunakan konsep Integral Riemann */
@@ -83,7 +102,40 @@ int main() {
               prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
-    float a = 2;
-    float b = 3;
+    
+    /* Fungsi dan Prosedur */
+    /* Fungsi: fPlus, fMin, fTimes, fDivide, fPower */
+    /* Prosedur: pPlus, pMin, pTimes, pDivide, pPower */
+    
+    /* Tes Fugsi dan Prosedur */
+    printf("========================================================\n");
+    printf("Kalkulator Sederhana\n");
+    printf("========================================================\n");
+
+    /* Input */
+    float a, b;
+    printf("Masukkan Nilai a: ");
+    scanf("%f", &a);
+    printf("Masukkan Nilai b: ");
+    scanf("%f", &b);
+
+    /* Output */
+    printf("Hasil %f + %f : %f\n", a, b, fPlus(a, b));
+    printf("Hasil %f - %f : %f\n", a, b, fMin(a, b));
+    printf("Hasil %f * %f : %f\n", a, b, fTimes(a, b));
+    printf("Hasil %f / %f : %f\n", a, b, fDivide(a, b));
+    printf("Hasil %f ^ %f : %f\n", a, b, fPower(a, b));
+
+    /* Kalkulator Riemann */
+    float h;
+    int n;
+    printf("Masukkan batas bawah: ");
+    scanf("%f", &a);
+    printf("Masukkan batas atas: ");
+    scanf("%f", &b);
+    printf("Masukkan tinggi trapesium: ");
+    scanf("%f", &h);
+    printf("Hasil Integral Riemann Trapezoid: %f\n", riemannTrapezoid(a, b, h, fPower));
+    printf("========================================================\n");
     return 0;
 }

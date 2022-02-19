@@ -76,31 +76,6 @@ void pPower(float *a, float b) {
     *a = fPower(*a, b);
 }
 
-void coef(float *array, int deg){
-    // float array_of_coef[deg];
-    for(int i=0; i<=deg; i++){
-        float temp_coef;
-        printf("Masukkan koefisien polinom dengan pangkat %d: ", i);
-        scanf("%f", &temp_coef);
-        // array_of_coef[i]=temp_coef;
-        array[i]=temp_coef;
-    }
-}
-
-float x_i(int i, int bawah, float delta_x){
-    return fPlus(bawah, fTimes(i, delta_x));
-    // return bawah + (i*delta_x);
-}
-
-float F_i(float xi, float *array_of_coef, int deg){
-    float sum = 0;
-    for(int j = 0; j<=(deg); j++){
-        pPlus(&sum, fTimes(array_of_coef[j], fPower(xi, j)));
-        // sum += array_of_coef[j]*(fPower(xi, j));
-    }
-    return sum;
-}
-
 int main() {
     /* Buatlah kalkulator integral menggunakan konsep Integral Riemann */
     /* Notes: Penggunaan operator aritmatika harus menggunakan fungsi dan
@@ -108,33 +83,56 @@ int main() {
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
 
-    int partition = 100;
-    int deg;
-    printf("Masukkan derajat polinom: ");
-    scanf("%d", &deg);
-    printf("Derajat polinom: %d\n", deg);
-    float array_of_coef[deg];
+    printf("Kalkulator integral fungsi polinom sederhana menggunakan metode Riemann\n");
+    printf("Oleh: Muhammad Afief Abdurrahman - 16021257\n\n");
+    int batasBawah, batasAtas, derajat;
 
-    coef(array_of_coef, deg);
+    printf("Masukkan derajat polinom integral: ");
+    scanf("%d", &derajat);
+    int banyakElemen = fPlus(derajat, 1);
+    float koefisien[banyakElemen];
 
-    int b, a;
-    printf("Masukkan batas atas: ");
-    scanf("%d", &b);
-    printf("Masukkan batas bawah: ");
-    scanf("%d", &a);
-    float delta_x = fDivide(fMin(b, a), partition);
-    // float delta_x = (b-a)/partition;
-    printf("%.5f\n", delta_x);
     float sum = 0;
-    for(int i=1; i<=partition; i++){
-        printf("i: %d\n", i);
-        float xi = x_i(i, a, delta_x);
-        float Fi = F_i(xi, array_of_coef, deg);
-        printf("Fi: %.1f\n", Fi);
-        printf("xi: %.1f\n", xi);
-        pPlus(&sum, fTimes(Fi, delta_x));
-        // sum += Fi*delta_x;
-        printf("sum: %.1f\n", sum);
+
+    int partisi = 10000;
+
+    printf("Masukkan batas atas integral: ");
+    scanf("%d", &batasAtas);
+
+    printf("Masukkan batas bawah integral: ");
+    scanf("%d", &batasBawah);
+
+    for(int i=0; i<=derajat; ++i){
+        float temp_coef;
+        printf("Masukkan koefisien dari x^%d: ", i);
+        scanf("%f", &temp_coef);
+
+        koefisien[i] = temp_coef;
     }
+
+    float deltaX = fDivide(fMin(batasAtas, batasBawah), partisi);
+
+    for(int j=0; j<=partisi; ++j){
+        // float x_i = batasBawah + deltaX*j;
+        float x_i = fPlus(batasBawah, fTimes(deltaX, j));
+        float sum_of_f = 0;
+
+        // hitung f(x_i)
+        for(int k=0; k<=derajat; ++k){
+            float temp_sum = 0;
+            if(k==0){
+                // temp_sum += koefisien[k];
+                pPlus(&temp_sum, koefisien[k]);
+            } else{
+                // temp_sum += koefisien[k]*(fPower(x_i, k))
+                pPlus(&temp_sum, fTimes(koefisien[k], fPower(x_i, k)));
+            }
+            // sum_of_f += temp_sum;
+            pPlus(&sum_of_f, temp_sum);
+        }
+        pPlus(&sum, fTimes(sum_of_f, deltaX));
+    }
+
+    printf("Hasil dari integral adalah %.3f", sum);
     return 0;
 }

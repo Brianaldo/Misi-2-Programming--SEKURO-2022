@@ -87,30 +87,49 @@ int main() {
     /* Main Program */
 	//Input
 	int a,b,n;
-	int koefisien,pangkat,partisi;
+	int koefisien, pangkat,partisi;
+	// Pendefinisian batas limit
 	printf("Enter a: ");
 	scanf("%d", &a);
 	printf("Enter b: ");
 	scanf("%d", &b);
+	// Pendefinisian fungsi
 	printf("Given a function f(x) = Ax^B\n");
 	printf("Enter A: ");
 	scanf("%d", &koefisien);
 	printf("Enter B: ");
 	scanf("%d", &pangkat);
+	// pendefinisian jumlah partisi
 	printf("Enter n (Partition): ");
 	scanf("%d", &partisi);
 	
-	//Program
+	//Process
 	float deltaX = fDivide(fMin(b,a),partisi);
 	float jlh = 0;
 	float y;
-	for (float i = a; i <= b; i+=deltaX){
-		y = fTimes(koefisien,fPower(i,pangkat));
-		jlh = fPlus(jlh,fTimes(deltaX,y));
+	if (pangkat != 0){
+		for (float i = a; i <= b; i+=deltaX){
+			if (i == 0) {
+				y = fTimes(koefisien,0);
+			}
+			else {
+				y = fTimes(koefisien,fPower(i,pangkat));
+			}
+			jlh = fPlus(jlh,fTimes(deltaX,y));
+			printf("%f %f\n",i,deltaX);
+			printf("%f\n",y);
+			printf("%f\n",jlh);
+		}
 	}
-	
-	//Output
-	printf("Jumlah Riemann = %f\n", jlh);
-    return 0;
+	else {
+		for (float i = a; i <= b; i+=deltaX){
+			if (i == 0) {
+				y = fTimes(koefisien,0);
+			}
+			else {
+				y = fTimes(koefisien,1);
+			}
+			jlh = fPlus(jlh,fTimes(deltaX,y));
+		}
 }
 

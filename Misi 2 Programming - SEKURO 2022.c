@@ -89,42 +89,42 @@ int main() {
     printf("Masukkan derajat polinom: ");
     scanf("%d", &derajat);
 
-    float fungsi[derajat];
-    for (int i = 1; i <= derajat+1; i++){
-        printf("Masukkan koefisien x derajat ke %d : ",(i-1));
+    int Llist = fPlus(derajat, 1);
+    float fungsi[Llist];
+    for (int i = 0; i < Llist ; i++){
+        printf("Masukkan koefisien x derajat ke %d : ",(i));
         scanf("%f", &fungsi[i]);
     }
 
 
     float a; // batas bawah
     float b; // batas atas
-    float N; // partisi
+    int N; // partisi
     printf("masukkan batas bawah: ");
     scanf("%f", &a);
     printf("masukkan batas atas: ");
     scanf("%f", &b);
     printf("masukkan banyak partisi: ");
-    scanf("%f", &N);
+    scanf("%d", &N);
 
-    float dx = fDivide(fMin(b,a),N); //panjang partisi
-    float hasil = 0; 
-    float x = 0; 
-    
+    float hasil = 0, x = 0;
+    float dx = fDivide(fMin(b, a), N); //∆x
 
-    //untuk perhitungan reimannya saya masih bingung :(
+    //perhitungan reiman kiri
    for (int i = 0; i < N; i++) {
-            x = fPlus(a, fTimes(fMin(b, a), fDivide(i, N)));
 
-            for (int j = 0; j < derajat; j++) {
+            x = fPlus(a, fTimes(fMin(b, a), fDivide(i, N)));  //x ke i
 
-            pPlus(&hasil, fTimes(fungsi[j], fPower(x, j)));
+            for (int j = 0; j < Llist; j++) {
 
+            pPlus(&hasil, fTimes(fungsi[j], fPower(x, j))); // fx ke j lalu ditambahkan ke hasil 
+           
             }
+
         }
-    pTimes(&hasil, fDivide(fMin(b, a), N));
- 
+   
+    pTimes(&hasil,dx); //hasil dikalikan dengan interval (∆x)
+    printf("%f",hasil);
 
-
-    printf("%f", hasil);
     return 0;
 }

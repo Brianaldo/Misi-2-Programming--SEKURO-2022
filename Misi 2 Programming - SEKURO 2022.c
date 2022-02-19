@@ -131,5 +131,5 @@ int main() {
 			}
 			jlh = fPlus(jlh,fTimes(deltaX,y));
 		}
+	}
 }
-

@@ -8,7 +8,6 @@ float fPlus(float a, float b) {
 void pPlus(float *a, float b) {
     pPlus(a,b);
     *a += b;
-    printf("%f", &a);
 }
 
 float fMin(float a, float b) {
@@ -52,16 +51,17 @@ float fPower(float a, float b) {
 void pPower(float *a, float b) {
     /* Procedure pangkat */
     pPower(a,b);
-    *a *= *a;
+    (*a) *= (*a);
 }
 
 int main() {
-    float *x,y;
+    float *x,y, *m, n, o;
     printf("Masukkan x  dan y: ");
-    scanf("%d %d", &x, &y);
+    scanf("%p %f", &x, &y);
     /* Buatlah kalkulator integral menggunakan konsep Integral Riemann */
-    pPower(x,y);                //x^y
-    pPlus(&pPower,fTimes(y,y));       //x^y + y*y
-    
+    m = pPower(x,y);                //x^y
+    n = fTimes(y,y);
+    o = pPlus(m,n);       //x^y + y*y
+    print("%p^%f")
     return 0;
 }

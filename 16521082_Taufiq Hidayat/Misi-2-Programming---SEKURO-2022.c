@@ -84,5 +84,37 @@ int main() {
               prosedur yang telah didefinisikan dan diimplementasi sebelumnya */
     /* Input dan output dibebaskan kepada Cakru URO 14 */
     /* Batasan: Derajat dari koefisien adalah whole number {0, 1, 2, ...} */
-    return 0;
+    
+    float a;
+    float b;
+    float c;
+    float l;
+    float r;
+
+    printf("kalkulator luas area integral riemann\n");
+
+    printf("integral terbatas persamaan y = ax^2 + bx + c\n");
+
+    printf("masukkan nilai a\n");
+    scanf("%f", &a);
+
+    printf("masukkan nilai b\n");
+    scanf("%f", &b);
+
+    printf("masukkan nilai c\n");
+    scanf("%f", &c);
+
+    printf("masukkan batas kiri\n");
+    scanf("%f", &l);
+
+    printf("masukkan batas kanan\n");
+    scanf("%f", &r);
+
+    float x;
+    float s;
+    for(x = l; x < r; x++)
+    {
+        pPlus(&s, fTimes(1, fPlus(fPlus(fTimes(a, fPower(x, 2)), fTimes(b, x)), c)));
+    }
+    printf("%f", s);
 }

@@ -4,6 +4,11 @@
 float fPlus(float a, float b) {
     /* Function tambah */
     /* Mengembalikan value a + b */
+    return a+b;
+}
+
+void main(){
+    printf("Hasil 4.5 + 3.5: %.2f\n", fPlus(4.5,3.5));
 }
 
 void pPlus(float *a, float b) {
@@ -13,8 +18,13 @@ void pPlus(float *a, float b) {
 }
 
 float fMin(float a, float b) {
-    /* Function kurang */
+    /* Function tambah */
     /* Mengembalikan value a + b */
+    return a-b;
+}
+
+void main(){
+    printf("Hasil 4.5 - 3.5: %.2f\n", fMin(4.5,3.5));
 }
 
 void pMin(float *a, float b) {
@@ -24,8 +34,13 @@ void pMin(float *a, float b) {
 }
 
 float fTimes(float a, float b) {
-    /* Function kali */
-    /* Mengembalikan value a * b */
+    /* Function tambah */
+    /* Mengembalikan value a + b */
+    return a*b;
+}
+
+void main(){
+    printf("Hasil 4.5 + 3.5: %.2f\n", fTimes(4.5,3.5));
 }
 
 void pTimes(float *a, float b) {
@@ -35,8 +50,13 @@ void pTimes(float *a, float b) {
 }
 
 float fDivide(float a, float b) {
-    /* Function bagi */
-    /* Mengembalikan value a / b */
+    /* Function tambah */
+    /* Mengembalikan value a + b */
+    return a/b;
+}
+
+void main(){
+    printf("Hasil 4.5 + 3.5: %.2f\n", fDivide(4.5,3.5));
 }
 
 void pDivide(float *a, float b) {
